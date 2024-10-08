@@ -4,6 +4,11 @@
 
 @import "@liveblocks/react-comments/styles.css";
 
+/* added to prevent scrollX or ScrollY */
+body {
+  overflow: hidden;
+}
+
 * {
   font-family: work sans, sans-serif;
 }
