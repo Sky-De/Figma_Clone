@@ -1,4 +1,4 @@
-import CursorSVG from "@/public/assets/CursorSVG";
+import CursorSVG from '@/public/assets/CursorSVG';
 
 type CursorProps = {
   color: string;
@@ -17,6 +17,16 @@ const Cursor = ({ color, message, x, y, id }: CursorProps) => {
       <CursorSVG color={color} />
       <span className="text-white">{id}</span>
       {/* Message here */}
+      {message && (
+        <div
+          className="absolute right-2 top-5 rounded-3xl px-4 py-2"
+          style={{ backgroundColor: color }}
+        >
+          <p className="text-white whitespace-nowrap leading-relaxed">
+            {message}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
