@@ -7,7 +7,7 @@ type Props = {
 export default function ReactionSelector({ setReaction }: Props) {
   return (
     <div
-      className="absolute bottom-20 left-0 ring-0 mx-auto w-fit transform rounded-full bg-white px-2"
+      className="absolute bottom-20 left-0 ring-0 mx-auto w-fit transform rounded-full bg-white"
       onPointerMove={(e) => e.stopPropagation()}
     >
       <ReactionBtn reaction="👍" onSelect={setReaction} />
