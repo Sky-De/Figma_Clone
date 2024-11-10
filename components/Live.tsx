@@ -6,6 +6,8 @@ import ReactionSelector from './reaction/ReactionBtn';
 import FlyingReaction from './reaction/FlyingReaction';
 import useInterval from '@/hooks/useInterval';
 import { useBroadcastEvent, useEventListener } from '@liveblocks/react';
+import { v4 as uuidv4 } from 'uuid';
+
 // test for fixing github config - work and personal accounts
 const Live = () => {
   const broadcast = useBroadcastEvent();
@@ -46,7 +48,7 @@ const Live = () => {
     broadcast({
       x: cursor?.x,
       y: cursor?.y,
-      value: cursorState.reaction,
+      value: cursorState?.reaction,
     });
   }, 200);
   const {
@@ -75,7 +77,7 @@ const Live = () => {
       <h1 className="text-2xl text-white">LiveBlock - Figma Clone</h1>;
       {reactions.map((r) => (
         <FlyingReaction
-          key={r.timestamp.toString()}
+          key={uuidv4()}
           x={r.point.x}
           y={r.point.y}
           timestamp={r.timestamp}
