@@ -7,9 +7,11 @@ import FlyingReaction from './reaction/FlyingReaction';
 import useInterval from '@/hooks/useInterval';
 import { useBroadcastEvent, useEventListener } from '@liveblocks/react';
 import { v4 as uuidv4 } from 'uuid';
-
+type Props = {
+  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+};
 // test for fixing github config - work and personal accounts
-const Live = () => {
+const Live = ({ canvasRef }: Props) => {
   const broadcast = useBroadcastEvent();
   useInterval(() => {
     setReactions((reaction) =>
@@ -68,13 +70,14 @@ const Live = () => {
 
   return (
     <div
+      id="canvas"
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       className="border-2 border-green-500 h-screen w-full flex justify-center items-center"
     >
-      <h1 className="text-2xl text-white">LiveBlock - Figma Clone</h1>;
+      <canvas ref={canvasRef} />
       {reactions.map((r) => (
         <FlyingReaction
           key={uuidv4()}
