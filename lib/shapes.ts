@@ -1,12 +1,13 @@
-import { fabric } from "fabric";
-import { v4 as uuidv4 } from "uuid";
+import * as fabric from 'fabric'; // v6
+
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   CustomFabricObject,
   ElementDirection,
   ImageUpload,
   ModifyShape,
-} from "@/types/type";
+} from '@/types/type';
 
 export const createRectangle = (pointer: PointerEvent) => {
   const rect = new fabric.Rect({
@@ -14,7 +15,7 @@ export const createRectangle = (pointer: PointerEvent) => {
     top: pointer.y,
     width: 100,
     height: 100,
-    fill: "#aabbcc",
+    fill: '#aabbcc',
     objectId: uuidv4(),
   } as CustomFabricObject<fabric.Rect>);
 
@@ -27,7 +28,7 @@ export const createTriangle = (pointer: PointerEvent) => {
     top: pointer.y,
     width: 100,
     height: 100,
-    fill: "#aabbcc",
+    fill: '#aabbcc',
     objectId: uuidv4(),
   } as CustomFabricObject<fabric.Triangle>);
 };
@@ -37,7 +38,7 @@ export const createCircle = (pointer: PointerEvent) => {
     left: pointer.x,
     top: pointer.y,
     radius: 100,
-    fill: "#aabbcc",
+    fill: '#aabbcc',
     objectId: uuidv4(),
   } as any);
 };
@@ -46,7 +47,7 @@ export const createLine = (pointer: PointerEvent) => {
   return new fabric.Line(
     [pointer.x, pointer.y, pointer.x + 100, pointer.y + 100],
     {
-      stroke: "#aabbcc",
+      stroke: '#aabbcc',
       strokeWidth: 2,
       objectId: uuidv4(),
     } as CustomFabricObject<fabric.Line>
@@ -57,11 +58,11 @@ export const createText = (pointer: PointerEvent, text: string) => {
   return new fabric.IText(text, {
     left: pointer.x,
     top: pointer.y,
-    fill: "#aabbcc",
-    fontFamily: "Helvetica",
+    fill: '#aabbcc',
+    fontFamily: 'Helvetica',
     fontSize: 36,
-    fontWeight: "400",
-    objectId: uuidv4()
+    fontWeight: '400',
+    objectId: uuidv4(),
   } as fabric.ITextOptions);
 };
 
@@ -70,20 +71,20 @@ export const createSpecificShape = (
   pointer: PointerEvent
 ) => {
   switch (shapeType) {
-    case "rectangle":
+    case 'rectangle':
       return createRectangle(pointer);
 
-    case "triangle":
+    case 'triangle':
       return createTriangle(pointer);
 
-    case "circle":
+    case 'circle':
       return createCircle(pointer);
 
-    case "line":
+    case 'line':
       return createLine(pointer);
 
-    case "text":
-      return createText(pointer, "Tap to Type");
+    case 'text':
+      return createText(pointer, 'Tap to Type');
 
     default:
       return null;
@@ -123,7 +124,7 @@ export const createShape = (
   pointer: PointerEvent,
   shapeType: string
 ) => {
-  if (shapeType === "freeform") {
+  if (shapeType === 'freeform') {
     canvas.isDrawingMode = true;
     return null;
   }
@@ -140,15 +141,15 @@ export const modifyShape = ({
 }: ModifyShape) => {
   const selectedElement = canvas.getActiveObject();
 
-  if (!selectedElement || selectedElement?.type === "activeSelection") return;
+  if (!selectedElement || selectedElement?.type === 'activeSelection') return;
 
   // if  property is width or height, set the scale of the selected element
-  if (property === "width") {
-    selectedElement.set("scaleX", 1);
-    selectedElement.set("width", value);  
-  } else if (property === "height") {
-    selectedElement.set("scaleY", 1);
-    selectedElement.set("height", value);
+  if (property === 'width') {
+    selectedElement.set('scaleX', 1);
+    selectedElement.set('width', value);
+  } else if (property === 'height') {
+    selectedElement.set('scaleY', 1);
+    selectedElement.set('height', value);
   } else {
     if (selectedElement[property as keyof object] === value) return;
     selectedElement.set(property as keyof object, value);
@@ -170,12 +171,12 @@ export const bringElement = ({
   // get the selected element. If there is no selected element or there are more than one selected element, return
   const selectedElement = canvas.getActiveObject();
 
-  if (!selectedElement || selectedElement?.type === "activeSelection") return;
+  if (!selectedElement || selectedElement?.type === 'activeSelection') return;
 
   // bring the selected element to the front
-  if (direction === "front") {
+  if (direction === 'front') {
     canvas.bringToFront(selectedElement);
-  } else if (direction === "back") {
+  } else if (direction === 'back') {
     canvas.sendToBack(selectedElement);
   }
 
