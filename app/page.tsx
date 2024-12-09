@@ -32,6 +32,9 @@ export default function Page() {
     window.addEventListener('resize', () => {
       handleResize({ canvas: fabricRef });
     });
+    return () => {
+      canvas.dispose(); // Dispose of the Fabric.js canvas instance
+    };
   }, []);
   return (
     <main className="h-screen overflow-hidden">
